@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
-import type { ColDef, ICellRendererParams } from 'ag-grid-community'; // Column Definition Type Interface
+import type { ColDef, ICellRendererParams, SelectionChangedEvent } from 'ag-grid-community'; // Column Definition Type Interface
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
 import { RowClassRules } from "ag-grid-community"; // or themeBalham, themeAlpine
 import type { ICellRendererAngularComp } from "ag-grid-angular";
@@ -57,6 +57,8 @@ pagination;
 paginationPageSize;
 paginationPageSizeSelector;
 
+@Output() selectedRows = new EventEmitter<any[]>(); 
+
 // Column Definitions: Defines the columns to be displayed.
 colDefs: ColDef[] = [
   { field: "Company Name" },
@@ -86,4 +88,14 @@ this.paginationPageSizeSelector = [10, 20, 100];
 
 
 }
+
+// Handle row selection changed event
+onSelectionChanged = (event: SelectionChangedEvent) => {
+ this.selectedRows.emit(event.api.getSelectedRows())
+};
+
+
+
 }
+
+

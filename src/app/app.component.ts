@@ -16,6 +16,7 @@ export class AppComponent {
   // data with numeric codes replaced with values
   parsedData: any;
   dataToDisplay = [];
+  selectedRows = [];
 
   constructor(private http: HttpClient, private papa: Papa) { }
 
@@ -148,5 +149,15 @@ export class AppComponent {
     return data
   }
 
+  shortlistCompanies() {
+    this.dataToDisplay = this.selectedRows;
+  }
 
+  viewAllCompanies() {
+    this.dataToDisplay = this.parsedData;
+  }
+
+  updateSelectedRows(event) {
+    this.selectedRows = event;
+  }
 }

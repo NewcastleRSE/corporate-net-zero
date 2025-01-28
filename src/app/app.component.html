@@ -6,12 +6,13 @@
 
 <div class="max-w-xl mx-auto mt-2 mb-2 p-6   ">
   
-  <p class=" mx-auto font-normal text-gray-700 dark:text-gray-400">Browse the list of companies to view their net zero targets. Click on column headers to change the sorting order and filter.</p>
-  
+  <p class=" mx-auto font-normal text-gray-700 dark:text-gray-400">Browse the list of companies to view their net zero targets. Click on column headers to change the sorting order and filter. Select companies to compare.</p>
+  <button (click)="shortlistCompanies()">Compare selected companies</button>
+  <button (click)="viewAllCompanies()">Clear selection</button>
 </div>
 
 
 <div class="content">
-<app-table id="table" *ngIf="dataToDisplay.length > 0" [data]="dataToDisplay"></app-table>
+<app-table (selectedRows)="updateSelectedRows($event)" id="table" *ngIf="dataToDisplay.length > 0" [data]="dataToDisplay"></app-table>
 </div>
 <!-- <app-footer></app-footer> -->
