@@ -151,13 +151,38 @@ export class AppComponent {
 
   shortlistCompanies() {
     this.dataToDisplay = this.selectedRows;
+    this.displayButton('viewAllBtn')
+    this.hideButton('shortlistBtn')
   }
 
   viewAllCompanies() {
     this.dataToDisplay = this.parsedData;
+    this.hideButton('viewAllBtn')
+    this.hideButton('shortlistBtn')
   }
 
   updateSelectedRows(event) {
     this.selectedRows = event;
+    if (this.selectedRows.length > 0) {
+      this.displayButton('shortlistBtn')
+    } 
+  }
+
+  displayButton(id) {
+    const button = document.getElementById(id);
+    console.log(button)
+    button.classList.remove('opacity-50'); 
+    button.classList.remove('cursor-not-allowed'); 
+    
+  }
+
+
+
+  hideButton(id) {
+    const button = document.getElementById(id);
+    console.log(button)
+    button.classList.add('opacity-50'); 
+    button.classList.add('cursor-not-allowed'); 
+    
   }
 }
