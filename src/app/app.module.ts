@@ -8,20 +8,25 @@ import { TableComponent } from './table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { DatacardsComponent } from './datacards/datacards.component';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DatacardsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule
+    AgGridModule,
+    BaseChartDirective
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(), provideCharts(withDefaultRegisterables())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

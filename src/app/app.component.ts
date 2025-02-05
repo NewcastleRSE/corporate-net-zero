@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
+import { ChartOptions, ChartType } from 'chart.js';
 
 
 @Component({
@@ -14,14 +15,28 @@ export class AppComponent {
 
   jsonData: any;
   // data with numeric codes replaced with values
-  parsedData: any;
+  parsedData = [];
   dataToDisplay = [];
   selectedRows = [];
+
+  numberNetZero = 0;
+
+  // charts
+  pieChartLabels = ['Net Zero', 'Not Net Zero'];
+  // pieChartData = [this.numberNetZero, this.parsedData.length - this.numberNetZero];
+  pieChartData = [50, 100];
+  public pieChartOptions: ChartOptions<'pie'> = {
+    responsive: false,
+  };
 
   constructor(private http: HttpClient, private papa: Papa) { }
 
   ngOnInit() {
     this.readCSV()
+    this.calculateNetZeroNumber()
+
+    // pie chart
+    
   }
 
   readCSV() {
@@ -45,6 +60,15 @@ export class AppComponent {
       this.parsedData = this.parseDataForCodes(this.jsonData);
       this.dataToDisplay = this.parsedData;
     });
+  }
+
+  calculateNetZeroNumber() {
+    this.numberNetZero = 0;
+    for (let i = 0; i < this.parsedData.length; i++) {
+      if (this.parsedData[i]['Net Zero']) {
+        this.numberNetZero += 1;
+      }
+    }
   }
 
   // replace numberic codes with values
