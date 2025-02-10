@@ -9,7 +9,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DatacardsComponent } from './datacards/datacards.component';
-import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 
 @NgModule({
@@ -23,10 +22,9 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule,
-    BaseChartDirective
+    AgGridModule
   ],
-  providers: [provideHttpClient(), provideCharts(withDefaultRegisterables())],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

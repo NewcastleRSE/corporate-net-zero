@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { ChartOptions, ChartType } from 'chart.js';
-
+import Chart from 'chart.js/auto';
+import * as _ from 'lodash';
+import { count } from 'rxjs';
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-root',
@@ -19,25 +22,25 @@ export class AppComponent {
   dataToDisplay = [];
   selectedRows = [];
 
-  numberNetZero = 0;
+  showTable = true;
+
 
   // charts
-  pieChartLabels = ['Net Zero', 'Not Net Zero'];
-  // pieChartData = [this.numberNetZero, this.parsedData.length - this.numberNetZero];
-  pieChartData = [50, 100];
-  public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
-  };
+  piechart: any=[];
+  byCountryChart: any=[];
+  bySectorChart: any=[];
 
   constructor(private http: HttpClient, private papa: Papa) { }
 
   ngOnInit() {
     this.readCSV()
-    this.calculateNetZeroNumber()
 
-    // pie chart
+
+
     
   }
+
+
 
   readCSV() {
     //  https://docs.google.com/spreadsheets/d/1kIRn2RuUiMKBEuEtkPRRMJxG3NMRpu1lnuuhiV93zE0/edit?usp=sharing
@@ -59,16 +62,254 @@ export class AppComponent {
       this.jsonData = d.data;
       this.parsedData = this.parseDataForCodes(this.jsonData);
       this.dataToDisplay = this.parsedData;
-    });
+      this.createPieChart();
+      this.createByCountryChart();
+   this.createBySectorChart()
+
+    
+
+  });
   }
 
-  calculateNetZeroNumber() {
-    this.numberNetZero = 0;
+  
+
+  createByCountryChart() {
+    var countries = this.getCountries();
+    var data = this.totalsPerCountry()
+    
+    const notZero = []
+    const netZero = []
+    Object.keys(data).forEach(key => {
+      notZero.push(data[key]['notNetZero'])
+      netZero.push(data[key]['netZero'])
+    })
+    
+    
+        // Net zero status by country
+        this.byCountryChart = new Chart('byCountry', {
+          type: 'bar',
+          data: {
+            labels: countries,
+            datasets: [
+              {
+                label: 'Net zero',
+                data: netZero,
+                backgroundColor: '#34d399'
+              },
+              {
+                label: 'Not net zero',
+                data: notZero,
+                backgroundColor: '#D3346E'
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              title: {
+                display: true,
+                text: 'Net Zero status by location',
+              },
+            },
+            responsive: true,
+            scales: {
+              x: {
+                stacked: true,
+              },
+              y: {
+                stacked: true
+              }
+            }
+          },
+    
+        })
+    
+        
+      }
+
+      createBySectorChart() {
+        var sectors = this.getSectors();
+        var data = this.totalsPerSector()
+        
+        const notZero = []
+        const netZero = []
+        Object.keys(data).forEach(key => {
+          notZero.push(data[key]['notNetZero'])
+          netZero.push(data[key]['netZero'])
+        })
+        
+        
+            // Net zero status by country
+            this.bySectorChart = new Chart('bySector', {
+              type: 'bar',
+              data: {
+                labels: sectors,
+                datasets: [
+                  {
+                    label: 'Net zero',
+                    data: netZero,
+                    backgroundColor: '#34d399'
+                  },
+                  {
+                    label: 'Not net zero',
+                    data: notZero,
+                    backgroundColor: '#D3346E'
+                  },
+                ],
+              },
+              options: {
+                plugins: {
+                  title: {
+                    display: true,
+                    text: 'Net Zero status by sector',
+                  },
+                },
+                responsive: true,
+                scales: {
+                  x: {
+                    stacked: true,
+                  },
+                  y: {
+                    stacked: true
+                  }
+                }
+              },
+        
+            })
+        
+            
+          }
+
+          getSectors() {
+            var sectors = []
+            for (let i = 0; i < this.parsedData.length; i++) {
+              if (!sectors.includes(this.parsedData[i].Sector)) {
+                sectors.push(this.parsedData[i].Sector)
+              }
+            }
+            return sectors
+          }          
+
+  getCountries() {
+    var countries = []
     for (let i = 0; i < this.parsedData.length; i++) {
-      if (this.parsedData[i]['Net Zero']) {
-        this.numberNetZero += 1;
+      if (!countries.includes(this.parsedData[i].Country)) {
+        countries.push(this.parsedData[i].Country)
       }
     }
+    return countries
+  }
+
+  createPieChart() {
+    const netZero = this.calculateNetZeroNumber();
+    const notZero = this.parsedData.length - netZero;
+    
+    this.piechart = new Chart('canvas', {
+      type: 'pie',
+      data: {
+        labels: ['Net Zero', 'Not Net Zero'],
+        datasets: [
+          {
+            label: 'Net zero status',
+            data: [netZero, notZero],
+            borderWidth: 1,
+            backgroundColor: ['#D3346E', '#34d399']
+          },
+        ],
+      },
+      options: {
+       
+      },
+    });
+    
+  }
+//
+  // {'country': 'Australia', 'netZero': 1, 'notNetZero': 2}
+  totalsPerSector() {
+    const groupBySector = this.parsedData.reduce((r, {Sector, ...rest}) => {
+      if (!r[Sector]) {
+        r[Sector] = { sector: Sector, data: [rest], netZero: 0, notNetZero: 0 };
+      } else {
+        r[Sector].data.push(rest);
+      }
+      return r;
+    }, {});
+    
+    var sectors = Object.keys(groupBySector)
+    
+    var sectorAndTotals = []
+    sectors.forEach(sector => {
+      sectorAndTotals[sector] = { 'netZero': 0, 'notNetZero': 0 }
+    })
+    
+    
+    Object.entries(groupBySector).forEach(element => {
+      var sector = element[1]['sector']
+    
+      element[1]['data'].forEach(el => {
+    if (el['Net Zero']) {
+      sectorAndTotals[sector]['netZero'] += 1;
+      
+    } else {
+    
+      sectorAndTotals[sector]['notNetZero'] += 1;
+      }
+    })
+    
+    
+    })   
+    
+     return sectorAndTotals
+      }
+
+  totalsPerCountry() {
+const groupByCountry = this.parsedData.reduce((r, {Country, ...rest}) => {
+  if (!r[Country]) {
+    r[Country] = { country: Country, data: [rest], netZero: 0, notNetZero: 0 };
+  } else {
+    r[Country].data.push(rest);
+  }
+  return r;
+}, {});
+
+var countries = Object.keys(groupByCountry)
+
+var countryAndTotals = []
+countries.forEach(country => {
+  countryAndTotals[country] = { 'netZero': 0, 'notNetZero': 0 }
+})
+
+
+Object.entries(groupByCountry).forEach(element => {
+  var country = element[1]['country']
+
+  element[1]['data'].forEach(el => {
+if (el['Net Zero']) {
+  countryAndTotals[country]['netZero'] += 1;
+  
+} else {
+
+countryAndTotals[country]['notNetZero'] += 1;
+  }
+})
+
+
+})   
+
+ return countryAndTotals
+  }
+
+  calculateNetZeroNumber(): number {
+    
+    var netZero = 0;
+
+    for (let i = 0; i < this.parsedData.length; i++) {
+      if (this.parsedData[i]['Net Zero']) {
+        netZero += 1;
+        
+      }
+      
+    }
+    return netZero;
   }
 
   // replace numberic codes with values
@@ -173,6 +414,23 @@ export class AppComponent {
     return data
   }
 
+  switchTab(content) {
+   var table = document.getElementById('table')
+   var graphs = document.getElementById('graphs')
+   table.classList.toggle('hidden')
+   graphs.classList.toggle('hidden')
+
+   var tableTab = document.getElementById('tableTab')
+   var graphTab = document.getElementById('graphTab')
+    tableTab.classList.toggle('cursor-not-allowed')
+    graphTab.classList.toggle('cursor-not-allowed')
+
+    tableTab.classList.toggle('pointer-events-none')
+    graphTab.classList.toggle('pointer-events-none')
+
+
+  }
+
   shortlistCompanies() {
     this.dataToDisplay = this.selectedRows;
     this.displayButton('viewAllBtn')
@@ -204,6 +462,7 @@ export class AppComponent {
 
   hideButton(id) {
     const button = document.getElementById(id);
+   
     console.log(button)
     button.classList.add('opacity-50'); 
     button.classList.add('cursor-not-allowed'); 
