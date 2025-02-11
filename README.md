@@ -47,18 +47,15 @@ ng generate --help
 
 ## Deployment
 
-To build the project run:
+This site is deployed using Github Pages. To update the site, run this command:
+`ng build --prod --output-path docs --base-href `    
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The `docs` folder should be updated. Then push to the main branch. 
 
 
 ## Usage
 
-[Site]()
+[Site](https://newcastlerse.github.io/corporate-net-zero/)
 [Spreadsheet](https://docs.google.com/spreadsheets/d/1kIRn2RuUiMKBEuEtkPRRMJxG3NMRpu1lnuuhiV93zE0/edit?usp=sharing)
 
 
