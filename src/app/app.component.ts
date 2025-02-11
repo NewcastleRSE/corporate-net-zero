@@ -429,6 +429,11 @@ countryAndTotals[country]['notNetZero'] += 1;
     tableTab.classList.toggle('pointer-events-none')
     graphTab.classList.toggle('pointer-events-none')
 
+    var tableBorder = tableTab.getElementsByTagName('span')[1]
+    var graphBorder = graphTab.getElementsByTagName('span')[1]
+   
+    tableBorder.classList.toggle('bg-orange-800')
+    graphBorder.classList.toggle('bg-orange-800')
 
   }
 
