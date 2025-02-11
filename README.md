@@ -1,8 +1,27 @@
 # CorporateNetZero
 
+
+
+## About 
+GitHub Pages website displaying information about company net zero target and status. Data is drawn from a Google Sheet stored on the team's Google Drive.
+
+### Project team
+Dr Albert Boaitey. 
+
+### RSE Contact 
+Dr Kate Court
+
+## Built with
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
 
-## Development server
+## Getting started
+
+### Prerequisites 
+
+### Installation
+Clone the repo and navigate to it. Run ```npm install``` to install all the required packages.
+
+## Running locally
 
 To start a local development server, run:
 
@@ -26,7 +45,7 @@ For a complete list of available schematics (such as `components`, `directives`,
 ng generate --help
 ```
 
-## Building
+## Deployment
 
 To build the project run:
 
@@ -36,24 +55,33 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Usage
 
-```bash
-ng test
-```
+[Site]()
+[Spreadsheet](https://docs.google.com/spreadsheets/d/1kIRn2RuUiMKBEuEtkPRRMJxG3NMRpu1lnuuhiV93zE0/edit?usp=sharing)
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+## Roadmap
 
-```bash
-ng e2e
-```
+- [x] Initial Research  
+- [x] Minimum viable product  
+- [] Alpha Release  
+- [] Feature-Complete Release  
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Contributing
 
-## Additional Resources
+### Main Branch
+Protected and can only be pushed to via pull requests. Should be considered stable and a representation of production code.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Dev Branch
+Should be considered fragile, code should compile and run but features may be prone to errors.
+
+### Feature Branches
+A branch per feature being worked on.
+
+https://nvie.com/posts/a-successful-git-branching-model/
+
+## License
+
+## Citation
