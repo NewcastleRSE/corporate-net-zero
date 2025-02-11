@@ -217,7 +217,8 @@ export class AppComponent {
         ],
       },
       options: {
-       
+       responsive: true,
+       maintainAspectRatio: true,
       },
     });
     
