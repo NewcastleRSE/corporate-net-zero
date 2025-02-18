@@ -87,12 +87,12 @@ export class HomeComponent {
             labels: countries,
             datasets: [
               {
-                label: 'Net zero',
+                label: 'Net zero target',
                 data: netZero,
                 backgroundColor: '#34d399'
               },
               {
-                label: 'Not net zero',
+                label: 'No net zero target',
                 data: notZero,
                 backgroundColor: '#D3346E'
               },
@@ -140,12 +140,12 @@ export class HomeComponent {
                 labels: sectors,
                 datasets: [
                   {
-                    label: 'Net zero',
+                    label: 'Net zero target',
                     data: netZero,
                     backgroundColor: '#34d399'
                   },
                   {
-                    label: 'Not net zero',
+                    label: 'No net zero target',
                     data: notZero,
                     backgroundColor: '#D3346E'
                   },
@@ -201,7 +201,7 @@ export class HomeComponent {
     this.piechart = new Chart('canvas', {
       type: 'pie',
       data: {
-        labels: ['Net Zero', 'Not Net Zero'],
+        labels: ['Net Zero Target', 'No Net Zero Target'],
         datasets: [
           {
             label: 'Net zero status',
