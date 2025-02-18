@@ -33,10 +33,6 @@ export class HomeComponent {
 
   ngOnInit() {
     this.readCSV()
-
-
-
-    
   }
 
 
@@ -180,9 +176,9 @@ export class HomeComponent {
 
           getSectors() {
             var sectors = []
-            for (let i = 0; i < this.parsedData.length; i++) {
-              if (!sectors.includes(this.parsedData[i].Sector)) {
-                sectors.push(this.parsedData[i].Sector)
+            for (let i = 0; i < this.dataToDisplay.length; i++) {
+              if (!sectors.includes(this.dataToDisplay[i].Sector)) {
+                sectors.push(this.dataToDisplay[i].Sector)
               }
             }
             return sectors
@@ -190,9 +186,9 @@ export class HomeComponent {
 
   getCountries() {
     var countries = []
-    for (let i = 0; i < this.parsedData.length; i++) {
-      if (!countries.includes(this.parsedData[i].Country)) {
-        countries.push(this.parsedData[i].Country)
+    for (let i = 0; i < this.dataToDisplay.length; i++) {
+      if (!countries.includes(this.dataToDisplay[i].Country)) {
+        countries.push(this.dataToDisplay[i].Country)
       }
     }
     return countries
@@ -225,7 +221,7 @@ export class HomeComponent {
 //
   // {'country': 'Australia', 'netZero': 1, 'notNetZero': 2}
   totalsPerSector() {
-    const groupBySector = this.parsedData.reduce((r, {Sector, ...rest}) => {
+    const groupBySector = this.dataToDisplay.reduce((r, {Sector, ...rest}) => {
       if (!r[Sector]) {
         r[Sector] = { sector: Sector, data: [rest], netZero: 0, notNetZero: 0 };
       } else {
@@ -262,7 +258,7 @@ export class HomeComponent {
       }
 
   totalsPerCountry() {
-const groupByCountry = this.parsedData.reduce((r, {Country, ...rest}) => {
+const groupByCountry = this.dataToDisplay.reduce((r, {Country, ...rest}) => {
   if (!r[Country]) {
     r[Country] = { country: Country, data: [rest], netZero: 0, notNetZero: 0 };
   } else {
@@ -302,8 +298,8 @@ countryAndTotals[country]['notNetZero'] += 1;
     
     var netZero = 0;
 
-    for (let i = 0; i < this.parsedData.length; i++) {
-      if (this.parsedData[i]['Net Zero']) {
+    for (let i = 0; i < this.dataToDisplay.length; i++) {
+      if (this.dataToDisplay[i]['Net Zero']) {
         netZero += 1;
         
       }
@@ -433,6 +429,23 @@ countryAndTotals[country]['notNetZero'] += 1;
    
     tableBorder.classList.toggle('bg-orange-800')
     graphBorder.classList.toggle('bg-orange-800')
+
+    //recreate charts based on selected data
+   this.clearCharts()
+    this.createPieChart();
+    this.createByCountryChart();
+    this.createBySectorChart();
+
+  }
+
+  clearCharts() {
+var chartIds = ['canvas', 'byCountry', 'bySector']
+chartIds.forEach(id => {
+  let chartStatus = Chart.getChart(id); // <canvas> id
+  if (chartStatus != undefined) {
+    chartStatus.destroy();
+  }
+})
 
   }
 
