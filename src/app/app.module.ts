@@ -9,6 +9,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DatacardsComponent } from './datacards/datacards.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { DatacardsComponent } from './datacards/datacards.component';
     TableComponent,
     HeaderComponent,
     FooterComponent,
-    DatacardsComponent
+    DatacardsComponent,
+    HomeComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

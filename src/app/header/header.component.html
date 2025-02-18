@@ -1,7 +1,7 @@
 <header class="bg-emerald-400 ">
     <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
       <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5">
+        <a (click)="goTo('')" class="-m-1.5 p-1.5">
           <span class="sr-only">Your Company</span>
           <!-- <img class="h-8 w-auto"  alt=""> -->
           <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -10,6 +10,8 @@
           
           
         </a>
+        <a (click)="goTo('')">Data</a>
+        <a (click)="goTo('about')">About us</a>
         <p class="text-sm/6 font-semibold text-white ml-4">Corporate Net Zero Targets</p>
       </div>
       <!-- <div class="flex lg:hidden">
