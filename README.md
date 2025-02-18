@@ -17,6 +17,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 ## Getting started
 
 ### Prerequisites 
+You will need to install the Angualr CLI to contribute or deploy
 
 ### Installation
 Clone the repo and navigate to it. Run ```npm install``` to install all the required packages.
@@ -48,9 +49,8 @@ ng generate --help
 ## Deployment
 
 This site is deployed using Github Pages. To update the site, run this command:
-`ng build --prod --output-path docs --base-href `    
+`ng deploy --base-href /corporate-net-zero/`    
 
-The `docs` folder should be updated. Then push to the main branch. 
 
 
 ## Usage
