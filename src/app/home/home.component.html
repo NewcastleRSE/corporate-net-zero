@@ -1,5 +1,9 @@
 <div>
  
+  <app-selector *ngIf="dataToDisplay.length > 0" [data]="dataToDisplay" (selected)="selectorDataEvent($event)" ></app-selector>
+
+
+  
     <div class=" sm:block">
       <nav class="isolate flex divide-x divide-gray-200 rounded-lg shadow" aria-label="Tabs">
         <!-- Current: "text-gray-900", Default: "text-gray-500 hover:text-gray-700" -->
@@ -19,7 +23,7 @@
   
   
   
-  
+
   
   
   

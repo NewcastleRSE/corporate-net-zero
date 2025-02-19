@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { DatacardsComponent } from './datacards/datacards.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { SelectorComponent } from './selector/selector.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AboutComponent } from './about/about.component';
     FooterComponent,
     DatacardsComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    SelectorComponent
   ],
   imports: [
     BrowserModule,

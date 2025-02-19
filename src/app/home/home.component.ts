@@ -66,6 +66,10 @@ export class HomeComponent {
   });
   }
 
+  // user has configured their query in the selector section
+  selectorDataEvent(event) {
+console.log(event)
+  }
   
 
   createByCountryChart() {
