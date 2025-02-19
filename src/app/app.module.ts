@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import {  provideHttpClient } from '@angular/common/http';
 import { TableComponent } from './table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DatacardsComponent } from './datacards/datacards.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SelectorComponent } from './selector/selector.component';
+import { DataDisplayComponent } from './data-display/data-display.component';
 
 
 @NgModule({
@@ -23,12 +25,14 @@ import { SelectorComponent } from './selector/selector.component';
     DatacardsComponent,
     HomeComponent,
     AboutComponent,
-    SelectorComponent
+    SelectorComponent,
+    DataDisplayComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule
+    AgGridModule,
+    FormsModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { get } from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-selector',
@@ -26,23 +26,49 @@ export class SelectorComponent {
   years= []
   selectedYears = []
 
+
+  list: any[];
+
   ngOnInit() {
+    this.list = [
+      {
+        id: 1,
+        title: 'Администратор',
+        checked: true,
+      },
+      {
+        id: 2,
+        title: 'Пользователь',
+        checked: false,
+      },
+      {
+        id: 3,
+        title: 'Директор',
+        checked: true,
+      },
+      {
+        id: 4,
+        title: 'Начальник',
+        checked: false,
+      },
+    ]
 this.breakdownData()
+console.log(this.countries)
   }
 
   breakdownData() {
     for (let i = 0; i < this.data.length; i++) {
-      if (!this.countries.includes(this.data[i].Country)) {
-        this.countries.push(this.data[i].Country)
+      if (_.filter(this.countries, ['name', this.data[i].Country]).length === 0) {
+        this.countries.push({name:this.data[i].Country, selected: false})
       }
-      if (!this.sectors.includes(this.data[i].Sector)) {
-        this.sectors.push(this.data[i].Sector)
+      if (_.filter(this.sectors, ['name', this.data[i].Sector]).length === 0) {
+        this.sectors.push({name:this.data[i].Sector, selected: false})
       }
-      if (!this.scopes.includes(this.data[i].Scope)) {
-        this.scopes.push(this.data[i].Scope)
+      if (_.filter(this.scopes, ['name', this.data[i].Scope]).length === 0) {
+        this.scopes.push({name:this.data[i].Scope, selected: false})
       }
-      if (!this.years.includes(this.data[i].Year)) {
-        this.years.push(this.data[i].Year)
+      if (_.filter(this.years, ['name', this.data[i].Year]).length === 0) {
+        this.years.push({name:this.data[i].Year, selected: false})
       }
     }
   }
@@ -52,6 +78,13 @@ toggleSectors() {
   document.getElementById('sectorsDropdown').classList.toggle('hidden')
 }
 
+// get result() {
+
+//   return this.sectors.filter(sector => sector.selected)
+// }
+get result() {
+  return this.list.filter(item => item.checked);
+}
 
 closeDropdowns() {
 
