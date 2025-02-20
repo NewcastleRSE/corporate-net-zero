@@ -68,7 +68,12 @@ export class HomeComponent {
 
   // user has configured their query in the selector section
   selectorDataEvent(event) {
-console.log(event)
+ 
+    console.log(event)
+    // if all selected, just add all data for that filter
+    // this.dataToDisplay = this.parsedData.filter((el) => {
+    //   return event.countries.includes(el.Country) && event.sectors.includes(el.Sector) && event.scopes.includes(el.Scope) && event.years.includes(el.Year)
+    // })
   }
   
 

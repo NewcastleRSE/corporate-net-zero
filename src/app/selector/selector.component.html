@@ -1,26 +1,120 @@
 
 
-<!-- Dropdown selector for sectors -->
-<button (click)="toggleSectors()"
- id="sectorsButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+
+<div class="bg-gradient-to-r from-orange-500 to-yellow-500 p-16 text-white">I want to see
+
+<!-- todo set dropdown length so scorll on e.g. countries -->
+ <!--  todo selected element not showing in button -->
+   <!--  todo make dropdowns stay underneath button -->
+
+    <!-- dropdown -->
+<button (click)="toggle('sectors')"
+ id="sectorsButton" class="relative m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  " type="button">
     <!-- display first selected item or, if there is not one, first item -->
- <span *ngIf="selectedSectors.length > 0">{{selectedSectors[0].name}}</span>
-    <span *ngIf="selectedSectors.length === 0">{{sectors[0].name}}</span>
+ <!-- <span *ngIf="selectedSectors.length > 0">{{selectedSectors[0].name}}</span> -->
+    <span >sectors...</span>
     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
     </svg>
     </button>
     
     <!-- Dropdown menu -->
-    <div  id="sectorsDropdown" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600">
+    <div  id="sectorsDropdown" class="z-10 absolute hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm ">
         <ul  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
-            <li *ngFor="let item of sectors" >      
-              <input  [(ngModel)]="item.selected" id={{item.name}}  type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+            <li *ngFor="let item of selectedSectors" >      
+              <input (change)="checkUncheckAll($event, 'sectors')" [(ngModel)]="item.selected"  id={{item.name}}  type="checkbox"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
               <label for={{item.name}} class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{item.name}}</label>       
           </li>
         </ul>
+    
     </div>
+    <!-- end dropdown  -->
+
+
+    companies headquartered in  
+
+    <!-- dropdown -->
+    <button (click)="toggle('countries')"
+    id="countriesButton" class="m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  " type="button">
+       <!-- display first selected item or, if there is not one, first item -->
+    <!-- <span *ngIf="selectedCountries.length > 0">{{selectedCountries[0].name}}</span> -->
+       <span >countries...</span>
+       <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+       </svg>
+       </button>
+       
+       <!-- Dropdown menu -->
+       <div  id="countriesDropdown" class="z-10 absolute inline-block hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm ">
+           <ul  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
+               <li *ngFor="let item of selectedCountries" >      
+                 <input (change)="checkUncheckAll($event, 'countries')" [(ngModel)]="item.selected" id={{item.name}}  type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                 <label for={{item.name}} class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{item.name}}</label>       
+             </li>
+           </ul>
+       
+       </div>
+       <!-- end dropdown  -->
+
+    and information on their disclosed
+<!-- dropdown -->
+<button (click)="toggle('scopes')"
+id="scopesButton" class="m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  " type="button">
+   <!-- display first selected item or, if there is not one, first item -->
+<!-- <span *ngIf="selectedScopes.length > 0">{{selectedScopes[0].name}}</span> -->
+   <span >scopes...</span>
+   <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+   </svg>
+   </button>
+   
+   <!-- Dropdown menu -->
+   <div  id="scopesDropdown" class="z-10 absolute  hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm ">
+       <ul  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
+           <li *ngFor="let item of selectedScopes" >      
+             <input (change)="checkUncheckAll($event, 'scopes')" [(ngModel)]="item.selected" id={{item.name}}  type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+             <label for={{item.name}} class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{item.name}}</label>       
+         </li>
+       </ul>
+   
+   </div>
+   <!-- end dropdown  -->
+
+    with a target date in
+
+    <!-- dropdown -->
+<button (click)="toggle('years')"
+id="yearsButton" class="relative m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  " type="button">
+   <!-- display first selected item or, if there is not one, first item -->
+<!-- <span *ngIf="selectedYears.length > 0">{{selectedYears[0].name}}</span> -->
+   <span >years...</span>
+   <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+   </svg>
+   </button>
+   
+   <!-- Dropdown menu -->
+   <div  id="yearsDropdown" class="z-10 absolute  hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm ">
+       <ul  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
+           <li *ngFor="let item of selectedYears" >      
+             <input (change)="checkUncheckAll($event, 'years')" [(ngModel)]="item.selected" id={{item.name}}  type="checkbox" value="" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-secondary-500 dark:focus:ring-secondary-600  focus:ring-2 ">
+             <label for={{item.name}} class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{item.name}}</label>       
+         </li>
+       </ul>
+   
+   </div>
+   <!-- end dropdown  -->
+
+   <button (click)="updateData()" class="m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+          
+</button>
+</div>
+
+
     
-    
+  
 
   <!-- to do clicking outside of dropdown should close all dropdowns -->
