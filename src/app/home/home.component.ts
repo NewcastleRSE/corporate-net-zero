@@ -29,6 +29,8 @@ export class HomeComponent {
   byCountryChart: any=[];
   bySectorChart: any=[];
 
+  dataLoaded = false;
+
   constructor(private http: HttpClient, private papa: Papa) { }
 
   ngOnInit() {
@@ -57,6 +59,7 @@ export class HomeComponent {
       this.jsonData = d.data;
       this.parsedData = this.parseDataForCodes(this.jsonData);
       this.dataToDisplay = this.parsedData;
+      this.dataLoaded = true;
       this.createPieChart();
       this.createByCountryChart();
    this.createBySectorChart()
@@ -69,11 +72,64 @@ export class HomeComponent {
   // user has configured their query in the selector section
   selectorDataEvent(event) {
  
-    console.log(event)
+    
+    var countries = []
+    var sectors = []
+    var scopes = []
+    var years = []
+
     // if all selected, just add all data for that filter
-    // this.dataToDisplay = this.parsedData.filter((el) => {
-    //   return event.countries.includes(el.Country) && event.sectors.includes(el.Sector) && event.scopes.includes(el.Scope) && event.years.includes(el.Year)
-    // })
+    
+    let allCountries = _.find(event.countries, function(o) {return o.name === 'All'})
+    if ( allCountries.selected || (_.filter(event.countries, function(o) { return o.selected; }).length === 0)) {
+      countries = event.countries.map(function(o) { return o.name; });
+   
+    } else {
+     
+       // filter only those that are selected
+    var c = _.filter(event.countries, function(o) { return o.selected; });
+    countries = c.map(function(o) { return o.name; });
+    }
+    let allSectors = _.find(event.sectors, function(o) {return o.name === 'All'})
+    if ( allSectors.selected || (_.filter(event.sectors, function(o) { return o.selected; }).length === 0)) {
+      sectors = event.sectors.map(function(o) { return o.name; });
+    } else {
+      var s = _.filter(event.sectors, function(o) { return o.selected; });
+    sectors = s.map(function(o) { return o.name; });
+    }
+    let allScopes = _.find(event.scopes, function(o) {return o.name === 'All'})
+    if ( allScopes.selected || (_.filter(event.scopes, function(o) { return o.selected; }).length === 0)) {
+      scopes = event.scopes.map(function(o) { return o.name; });
+    } else {
+       var sc = _.filter(event.scopes, function(o) { return o.selected; });
+    scopes = sc.map(function(o) { return o.name; });
+    }
+    let allYears = _.find(event.years, function(o) {return o.name === 'All'})
+    if ( allYears.selected || (_.filter(event.years, function(o) { return o.selected; }).length === 0)) {
+      years = event.years.map(function(o) { return o.name; });
+    } else {
+       var y = _.filter(event.years, function(o) { return o.selected; });
+    years = y.map(function(o) { return o.name; });
+    }
+
+
+this.dataToDisplay = []
+
+this.parsedData.forEach(el => {
+  if(el['Company Name'] === 'Agrifirm') {
+    console.log(countries.includes(el.Country))
+console.log(sectors.includes(el.Sector))
+console.log(scopes.includes(el.Scope))
+console.log(years.includes(el['Target date']))
+  }
+  // filter for blank or matching fields
+  if ((countries.includes(el.Country)|| el.Country === ''  )&& (sectors.includes(el.Sector)  || el.Sector === '')&& (scopes.includes(el.Scope) || el.Scope === '')&& (years.includes(el['Target date']) || el['Target date'] === '')) {
+    this.dataToDisplay.push(el)
+  }
+})
+
+
+
   }
   
 
@@ -479,7 +535,7 @@ chartIds.forEach(id => {
 
   displayButton(id) {
     const button = document.getElementById(id);
-    console.log(button)
+   
     button.classList.remove('opacity-50'); 
     button.classList.remove('cursor-not-allowed'); 
     
@@ -489,8 +545,7 @@ chartIds.forEach(id => {
 
   hideButton(id) {
     const button = document.getElementById(id);
-   
-    console.log(button)
+  
     button.classList.add('opacity-50'); 
     button.classList.add('cursor-not-allowed'); 
     

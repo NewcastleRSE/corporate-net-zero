@@ -30,30 +30,9 @@ export class SelectorComponent {
   list: any[];
 
   ngOnInit() {
-    this.list = [
-      {
-        id: 1,
-        title: 'Администратор',
-        checked: true,
-      },
-      {
-        id: 2,
-        title: 'Пользователь',
-        checked: false,
-      },
-      {
-        id: 3,
-        title: 'Директор',
-        checked: true,
-      },
-      {
-        id: 4,
-        title: 'Начальник',
-        checked: false,
-      },
-    ]
+   
 this.breakdownData()
-this.setDropdownPositions()
+// this.setDropdownPositions()
   }
 
   breakdownData() {
@@ -109,6 +88,8 @@ setDropdownPositions() {
   for (let i = 0; i < dropdowns.length; i++) {
     let dropdown = document.getElementById(dropdowns[i]+'Dropdown')
     let button = document.getElementById(dropdowns[i]+'Button')
+    console.log(dropdown)
+    console.log(button)
     dropdown.style.left = button.offsetLeft + 'px'
     dropdown.style.top = button.offsetTop + button.offsetHeight + 'px'
   }

@@ -35,7 +35,7 @@
 
     <!-- dropdown -->
     <button (click)="toggle('countries')"
-    id="countriesButton" class="m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  " type="button">
+    id="countriesButton" class="relative m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  " type="button">
        <!-- display first selected item or, if there is not one, first item -->
     <!-- <span *ngIf="selectedCountries.length > 0">{{selectedCountries[0].name}}</span> -->
        <span >countries...</span>
@@ -59,7 +59,7 @@
     and information on their disclosed
 <!-- dropdown -->
 <button (click)="toggle('scopes')"
-id="scopesButton" class="m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  " type="button">
+id="scopesButton" class="relative m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  " type="button">
    <!-- display first selected item or, if there is not one, first item -->
 <!-- <span *ngIf="selectedScopes.length > 0">{{selectedScopes[0].name}}</span> -->
    <span >scopes...</span>
@@ -105,10 +105,11 @@ id="yearsButton" class="relative m-4 text-white bg-primary-600 hover:bg-primary-
    </div>
    <!-- end dropdown  -->
 
-   <button (click)="updateData()" class="m-4 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  ">
+   <button (click)="updateData()" class="m-4 text-white  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  ">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
       </svg>
+      
           
 </button>
 </div>
