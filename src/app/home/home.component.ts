@@ -116,12 +116,7 @@ export class HomeComponent {
 this.dataToDisplay = []
 
 this.parsedData.forEach(el => {
-  if(el['Company Name'] === 'Agrifirm') {
-    console.log(countries.includes(el.Country))
-console.log(sectors.includes(el.Sector))
-console.log(scopes.includes(el.Scope))
-console.log(years.includes(el['Target date']))
-  }
+  
   // filter for blank or matching fields
   if ((countries.includes(el.Country)|| el.Country === ''  )&& (sectors.includes(el.Sector)  || el.Sector === '')&& (scopes.includes(el.Scope) || el.Scope === '')&& (years.includes(el['Target date']) || el['Target date'] === '')) {
     this.dataToDisplay.push(el)
@@ -492,8 +487,8 @@ countryAndTotals[country]['notNetZero'] += 1;
     var tableBorder = tableTab.getElementsByTagName('span')[1]
     var graphBorder = graphTab.getElementsByTagName('span')[1]
    
-    tableBorder.classList.toggle('bg-orange-800')
-    graphBorder.classList.toggle('bg-orange-800')
+    tableBorder.classList.toggle('bg-secondary-600')
+    graphBorder.classList.toggle('bg-secondary-600')
 
     //recreate charts based on selected data
    this.clearCharts()
