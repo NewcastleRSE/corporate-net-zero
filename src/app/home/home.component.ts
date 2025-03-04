@@ -151,12 +151,12 @@ this.parsedData.forEach(el => {
               {
                 label: 'Net zero target',
                 data: netZero,
-                backgroundColor: '#34d399'
+                backgroundColor:'#34d399'
               },
               {
                 label: 'No net zero target',
                 data: notZero,
-                backgroundColor: '#D3346E'
+                backgroundColor:  '#f97316'
               },
             ],
           },
@@ -209,7 +209,7 @@ this.parsedData.forEach(el => {
                   {
                     label: 'No net zero target',
                     data: notZero,
-                    backgroundColor: '#D3346E'
+                    backgroundColor: '#f97316'
                   },
                 ],
               },
@@ -269,7 +269,7 @@ this.parsedData.forEach(el => {
             label: 'Net zero status',
             data: [netZero, notZero],
             borderWidth: 1,
-            backgroundColor: ['#D3346E', '#34d399']
+            backgroundColor: ['#34d399', '#f97316']
           },
         ],
       },
