@@ -20,7 +20,7 @@
     
     <!-- Dropdown menu -->
     <div  id="sectorsDropdown" class="z-10 absolute hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm ">
-        <ul  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
+        <ul  class="max-h-[400px] overflow-y-auto p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
             <li *ngFor="let item of selectedSectors" >      
               <input id="sectorsInputDropdown" (change)="checkUncheckAll($event, 'sectors')" [(ngModel)]="item.selected"  id={{item.name}}  type="checkbox"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
               <label for={{item.name}} class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{item.name}}</label>       
@@ -46,7 +46,7 @@
        
        <!-- Dropdown menu -->
        <div  id="countriesDropdown" class="z-10 absolute inline-block hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm ">
-           <ul  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
+           <ul  class="max-h-[400px] overflow-y-auto p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
                <li *ngFor="let item of selectedCountries" >      
                  <input id="countriesInputDropdown" (change)="checkUncheckAll($event, 'countries')" [(ngModel)]="item.selected" id={{item.name}}  type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                  <label for={{item.name}} class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{item.name}}</label>       
@@ -70,7 +70,7 @@ id="scopesButtonDropdown" class="relative m-4 text-white bg-primary-600 hover:bg
    
    <!-- Dropdown menu -->
    <div  id="scopesDropdown" class="z-10 absolute  hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm ">
-       <ul  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
+       <ul  class="max-h-[400px] overflow-y-auto p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
            <li *ngFor="let item of selectedScopes" >      
              <input id="scopesInputDropdown" (change)="checkUncheckAll($event, 'scopes')" [(ngModel)]="item.selected" id={{item.name}}  type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
              <label for={{item.name}} class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{item.name}}</label>       
@@ -95,7 +95,7 @@ id="yearsButtonDropdown" class="relative m-4 text-white bg-primary-600 hover:bg-
    
    <!-- Dropdown menu -->
    <div  id="yearsDropdown" class="z-10 absolute  hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm ">
-       <ul  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
+       <ul  class="max-h-[400px] overflow-y-auto p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
            <li *ngFor="let item of selectedYears" >      
              <input id="yearsInputDropdown" (change)="checkUncheckAll($event, 'years')" [(ngModel)]="item.selected" id={{item.name}}  type="checkbox" value="" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-secondary-500 dark:focus:ring-secondary-600  focus:ring-2 ">
              <label for={{item.name}} class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{item.name}}</label>       
