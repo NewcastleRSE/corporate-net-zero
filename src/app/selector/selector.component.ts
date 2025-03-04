@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, SimpleChanges } from '@angular/core';
 import * as _ from 'lodash';
 
 @Component({
@@ -26,14 +26,51 @@ export class SelectorComponent {
   years= []
   selectedYears = []
 
+  dropdowns = ['sectors', 'countries', 'scopes', 'years']
 
   list: any[];
+
+
+  @Input() clickEvent;
 
   ngOnInit() {
    
 this.breakdownData()
 // this.setDropdownPositions()
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['clickEvent']) {
+      if (this.clickEvent === 'closeAll') {
+        // close all dropdowns
+        this.closeDropdown(this.dropdowns)
+    } else if (this.clickEvent === 'scopes') {
+      // close all but scopes dropdown
+      this.closeDropdown(['sectors', 'countries', 'years'])
+    } else if (this.clickEvent === 'countries') {
+      // close all but countries dropdown
+      this.closeDropdown(['sectors', 'scopes', 'years'])
+    } else if (this.clickEvent === 'sectors') {
+      // close all but sectors dropdown
+      this.closeDropdown(['countries', 'scopes', 'years'])
+    } else if (this.clickEvent === 'years') {
+      // close all but years dropdown
+      this.closeDropdown(['countries', 'scopes', 'sectors'])
+    }
+  }
+}
+
+closeDropdown(dropdownsToClose) {
+  dropdownsToClose.forEach(function(dropdown){
+    // if element is currently open (i.e. has class block), then close it
+    var element = document.getElementById(dropdown+'Dropdown')
+    if (element.classList.contains('block')) {
+      element.classList.toggle('block')
+      element.classList.toggle('hidden')
+    }
+  })
+ 
+}
 
   breakdownData() {
     for (let i = 0; i < this.data.length; i++) {

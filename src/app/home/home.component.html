@@ -1,6 +1,6 @@
 <div>
  
-  <app-selector *ngIf="dataLoaded" [data]="dataToDisplay" (selected)="selectorDataEvent($event)" ></app-selector>
+  <app-selector *ngIf="dataLoaded" [data]="dataToDisplay" [clickEvent]="clickTarget" (selected)="selectorDataEvent($event)" ></app-selector>
 
 
   

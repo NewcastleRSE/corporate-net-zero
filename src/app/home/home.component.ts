@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { ChartOptions, ChartType } from 'chart.js';
 import Chart from 'chart.js/auto';
@@ -22,6 +22,8 @@ export class HomeComponent {
   selectedRows = [];
 
   showTable = true;
+
+  clickTarget = ''
 
 
   // charts
@@ -545,4 +547,24 @@ chartIds.forEach(id => {
     button.classList.add('cursor-not-allowed'); 
     
   }
+
+  @HostListener('click', ['$event'])
+  onClick(event) {
+ 
+
+ // if the user has clicked on a dropdown, establish which part of one
+    if (event.target.parentNode.id && event.target.parentNode.id.includes('Dropdown') ) {
+       this.clickTarget = event.target.parentNode.id.split('Button')[0]
+    } else if ( event.target.id.includes('Dropdown')) {
+      // button so close others
+      this.clickTarget = event.target.id.split('Button')[0]
+    } else if (event.target.type && event.target.type === 'checkbox') {
+      this.clickTarget = 'checkbox'
+
+    } else {
+      // not clicking on a dropdown
+      this.clickTarget = 'closeAll'
+    }
+
+    }
 }
