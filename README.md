@@ -49,7 +49,7 @@ ng generate --help
 ## Deployment
 
 This site is deployed using Github Pages. To update the site, run this command:
-`ng deploy --base-href /corporate-net-zero/`    
+`ng deploy --cname=corporatefoodnetzero.com`    
 
 
 
