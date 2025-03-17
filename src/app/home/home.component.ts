@@ -42,11 +42,16 @@ export class HomeComponent {
 
 
   readCSV() {
+    // RSE team doc
     //  https://docs.google.com/spreadsheets/d/1kIRn2RuUiMKBEuEtkPRRMJxG3NMRpu1lnuuhiV93zE0/edit?usp=sharing
+    //const docId = '1kIRn2RuUiMKBEuEtkPRRMJxG3NMRpu1lnuuhiV93zE0'
+    //const sheetId = 'Data'
+    //const key = 'AIzaSyCujJHHSQNwwaAdfnyRdt2xBbBaJs5SRss'
 
-    const docId = '1kIRn2RuUiMKBEuEtkPRRMJxG3NMRpu1lnuuhiV93zE0'
-    const sheetId = 'Data'
-    const key = 'AIzaSyCujJHHSQNwwaAdfnyRdt2xBbBaJs5SRss'
+    // https://docs.google.com/spreadsheets/d/1n6mFdC7lMxvB7OZ1LoRsQiPtUl1ggyc5YsE_Xp4wWhw/edit?usp=drive_link
+    const sheetId = 'data as google sheet'
+    const key = 'AIzaSyBM30JHZgtHP9Vs5BtSkuMyNjKjXv-PapE'
+    const docId = '1n6mFdC7lMxvB7OZ1LoRsQiPtUl1ggyc5YsE_Xp4wWhw'
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${docId}/values/${sheetId}?key=${key}`
 
     this.http.get(url, {

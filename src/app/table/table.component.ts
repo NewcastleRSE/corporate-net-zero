@@ -68,7 +68,7 @@ colDefs: ColDef[] = [
   { field: "Net Zero", filter: true, cellRenderer: netZeroRenderer  },
   { field: "Target date"  },
   { field: "Scope", filter: true  },
-  { field: "Company Year Revenue", valueFormatter: p => '$' + p.value },
+  { field: "Company Year Revenue($million)", valueFormatter: p => '$' + p.value },
 ];
 
 
